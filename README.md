@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Weather Project is a weather monitoring tool for 11 cities in Mexico. This personal project showcases my abilities in data engineering tools. The pipeline is orchestrated using Azure Data Factory to gather weather data from the "Open-Meteo API" for each city. The data is then stored as JSON files in Azure Data Lake Storage. Subsequently, the files are fed into Databricks for data transformation processes, generating a final report table that allows users to query the data. Finally, a [Python script](https://github.com/GP-20/weather_project_databricks/blob/main/Notebooks/reports/weather_graphs.py) runs to create graphs related to the local temperatures during the past week. The entire process runs daily at 08:00 UTC using a scheduled trigger.
+Weather Project is a weather monitoring tool for 11 cities in Mexico. This personal project showcases my abilities in data engineering tools. The pipeline is orchestrated using Azure Data Factory to gather weather data from the [Open-Meteo API](https://open-meteo.com/en/features#available-apis) for each city. The data is then stored as JSON files in Azure Data Lake Storage. Subsequently, the files are fed into Databricks for data transformation processes, generating a final report table that allows users to query the data. Finally, a [Python script](https://github.com/GP-20/weather_project_databricks/blob/main/Notebooks/reports/weather_graphs.py) runs to create graphs related to the local temperatures during the past week. The entire process runs daily at 08:00 UTC using a scheduled trigger.
 
 ## Table of Contents
 
