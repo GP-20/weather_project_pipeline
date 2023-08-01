@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/weather-project/reports/weather_graphs"
+					"notebookPath": "/Repos/gdata20@outlook.com/weather_project_databricks/Notebooks/reports/weather_graphs"
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_weatherproject_databricks",
