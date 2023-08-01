@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "weather-project-adf"
+		},
+		"ls_weatherproject_dl_accountKey": {
+			"value": ""
+		},
+		"ls_http_ingest_data_properties_typeProperties_url": {
+			"value": "https://api.open-meteo.com/v1/"
+		},
+		"ls_weatherproject_databricks_properties_typeProperties_existingClusterId": {
+			"value": "0728-230811-b685wxb6"
+		},
+		"ls_weatherproject_dl_properties_typeProperties_url": {
+			"value": "https://weatherprojectdl.dfs.core.windows.net/"
+		},
+		"tr_run_pipelines_properties_pl_run_pipelines_parameters_window_date": {
+			"value": "@trigger().startTime"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
