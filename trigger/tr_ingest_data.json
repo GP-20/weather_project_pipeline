@@ -1,0 +1,27 @@
+{
+	"name": "tr_ingest_data",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_run_pipelines",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"window_date": "@trigger().startTime"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2023-07-29T08:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "ls_weatherproject_dl",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://weatherprojectdl.dfs.core.windows.net/",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEI1OUMzMkY2LUQyQjUtNEFGRC1CM0Y3LTExOEIzRjE3NzdGMl9kMDI1ZGU1MC04ZTE4LTQ4ODMtOWJkOS1iMTYwYTI4ZTRmMTEiDQp9"
+		}
+	}
+}

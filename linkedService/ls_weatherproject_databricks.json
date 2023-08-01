@@ -1,0 +1,14 @@
+{
+	"name": "ls_weatherproject_databricks",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-5905928011115509.9.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/bc62cfec-7246-4100-888b-48f7d08a77d4/resourceGroups/weather_project_rg/providers/Microsoft.Databricks/workspaces/weather_project_ws",
+			"existingClusterId": "0728-230811-b685wxb6"
+		}
+	}
+}

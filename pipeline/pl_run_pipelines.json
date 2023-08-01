@@ -1,0 +1,100 @@
+{
+	"name": "pl_run_pipelines",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute pl api ingest data",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_api_ingest_data",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"window_date": {
+							"value": "@pipeline().parameters.window_date",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Execute ingest new data databricks",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute pl api ingest data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_ingest_new_data_databricks",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"p_file_date": {
+							"value": "@pipeline().parameters.window_date",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Execute transform pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute ingest new data databricks",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_transform_data",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Execute query data",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Execute transform pipeline",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_query_data",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"parameters": {
+			"window_date": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-31T22:59:17Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

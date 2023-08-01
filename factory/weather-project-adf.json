@@ -1,0 +1,9 @@
+{
+	"name": "weather-project-adf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c856f5fb-789f-4347-8eee-06f08b67973e",
+		"tenantId": "ed116a8f-36cb-432f-8448-d013b8a06927"
+	}
+}

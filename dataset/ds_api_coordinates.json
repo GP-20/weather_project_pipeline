@@ -1,0 +1,33 @@
+{
+	"name": "ds_api_coordinates",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_weatherproject_dl",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "api_coordinates.json",
+				"fileSystem": "coordinates"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"latitude": {
+					"type": "string"
+				},
+				"longitude": {
+					"type": "string"
+				},
+				"file_name": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

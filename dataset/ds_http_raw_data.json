@@ -1,0 +1,35 @@
+{
+	"name": "ds_http_raw_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_weatherproject_dl",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"window_date": {
+				"type": "string"
+			},
+			"file_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().file_name",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@formatDateTime(dataset().window_date,'yyyy-MM-dd')",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

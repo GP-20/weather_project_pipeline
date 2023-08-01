@@ -1,0 +1,33 @@
+{
+	"name": "pl_transform_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "join data notebook",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/weather-project/transform/join_data"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_weatherproject_databricks",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "Transfom data"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-31T02:28:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

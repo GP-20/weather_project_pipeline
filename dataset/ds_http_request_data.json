@@ -1,0 +1,30 @@
+{
+	"name": "ds_http_request_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_http_ingest_data",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"latitude": {
+				"type": "string"
+			},
+			"longitude": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@concat('forecast?latitude=',dataset().latitude,'&longitude=',dataset().longitude,'&hourly=temperature_2m,relativehumidity_2m,rain,snowfall,windspeed_10m&past_days=1&forecast_days=0&timezone=auto')",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

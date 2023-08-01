@@ -1,0 +1,137 @@
+{
+	"name": "pl_api_ingest_data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup api coordinates file",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "ds_api_coordinates",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Execute copy for each city",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup api coordinates file",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup api coordinates file').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy weather data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_http_request_data",
+									"type": "DatasetReference",
+									"parameters": {
+										"latitude": {
+											"value": "@item().latitude",
+											"type": "Expression"
+										},
+										"longitude": {
+											"value": "@item().longitude",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_http_raw_data",
+									"type": "DatasetReference",
+									"parameters": {
+										"window_date": {
+											"value": "@pipeline().parameters.window_date",
+											"type": "Expression"
+										},
+										"file_name": {
+											"value": "@item().file_name",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"window_date": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Ingest data"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-31T02:28:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
